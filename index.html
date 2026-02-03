@@ -5,19 +5,19 @@
     <title>بۆ تۆ ❤️</title>
     <style>
         body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; background-color: #ffe4e1; text-align: center; overflow: hidden; direction: rtl; }
-        img { width: 230px; border-radius: 20px; margin-bottom: 20px; }
-        .buttons { position: relative; width: 100%; height: 50px; display: flex; justify-content: center; gap: 20px; flex-direction: row-reverse; }
-        button { padding: 12px 25px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; font-family: inherit; }
+        img { width: 250px; border-radius: 20px; margin-bottom: 20px; }
+        .btn-container { display: flex; justify-content: center; align-items: center; gap: 50px; width: 100%; height: 60px; position: relative; }
+        button { padding: 12px 25px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; min-width: 100px; }
         #yes { background: #4caf50; color: white; }
-        #no { background: #f44336; color: white; position: absolute; transition: 0.1s; }
+        #no { background: #f44336; color: white; transition: 0.1s; }
         h1 { font-size: 28px; color: #d32f2f; margin-bottom: 30px; }
     </style>
 </head>
 <body>
     <div id="main">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNpS/giphy.gif">
+        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNpS/giphy.gif">
         <h1>بیرم ناکەی هەی ....</h1>
-        <div class="buttons">
+        <div class="btn-container">
             <button id="yes" onclick="win()">بەڵێ</button>
             <button id="no" onmouseover="move()" onclick="move()">نەخێر</button>
         </div>
@@ -25,13 +25,13 @@
     <script>
         function move() {
             const btn = document.getElementById('no');
+            btn.style.position = 'absolute';
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            btn.style.left = x + 'px'; btn.style.top = y + 'px';
         }
         function win() {
-            document.getElementById('main').innerHTML = "<h1>دەستخۆش! ❤️ چاوەڕێت دەکەم</h1><img src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/kyLYXonQpkUsLYvDEK/giphy.gif'>";
+            document.getElementById('main').innerHTML = "<h1>دەستخۆش! ❤️</h1><img src='https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/kyLYXonQpkUsLYvDEK/giphy.gif'>";
         }
     </script>
 </body>
