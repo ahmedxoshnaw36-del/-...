@@ -10,6 +10,7 @@
             height: 100vh; margin: 0; font-family: sans-serif; background-color: #ffe4e1; 
             text-align: center; overflow: hidden; 
         }
+        /* Reliability fix for the image */
         img { width: 250px; border-radius: 20px; margin-bottom: 20px; }
         h1 { font-size: 26px; color: #d32f2f; margin-bottom: 30px; z-index: 1; }
         .btn-container { 
@@ -18,7 +19,7 @@
         }
         button { 
             border: none; border-radius: 12px; cursor: pointer; 
-            font-weight: bold; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            font-weight: bold; transition: all 0.2s ease-out; 
             font-family: inherit;
         }
         #yes { background: #4caf50; color: white; padding: 15px 30px; font-size: 20px; z-index: 50; position: relative; }
@@ -27,11 +28,11 @@
 </head>
 <body>
     <div id="main">
-        <img src="https://i.postimg.cc/85zXq82m/minion-heart.gif">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNpS/giphy.gif">
         <h1>بیرم ناکەی هەی ....</h1>
         <div class="btn-container">
             <button id="yes" onclick="win()">بەڵێ</button>
-            <button id="no" onclick="shrinkNo()">نەخێر</button>
+            <button id="no" onclick="perfectReaction()">نەخێر</button>
         </div>
     </div>
 
@@ -39,29 +40,30 @@
         let yesScale = 1;
         let noScale = 1;
 
-        function shrinkNo() {
+        function perfectReaction() {
             const yesBtn = document.getElementById('yes');
             const noBtn = document.getElementById('no');
             
-            // 1. Make Yes button grow bigger
-            yesScale += 0.5;
+            // 1. Grows the Yes button significantly
+            yesScale += 0.6;
             yesBtn.style.transform = `scale(${yesScale})`;
             
-            // 2. Make No button get smaller but NOT disappear entirely
-            noScale -= 0.15;
+            // 2. Shrinks the No button but keeps it visible
+            noScale -= 0.2;
             if (noScale < 0.3) noScale = 0.3; 
             noBtn.style.transform = `scale(${noScale})`;
 
-            // 3. Move the "No" button slightly so it's harder to hit
-            const x = (Math.random() - 0.5) * 200;
-            const y = (Math.random() - 0.5) * 200;
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            // 3. Perfected jumping: keeps it inside the screen view
+            const x = (Math.random() - 0.5) * (window.innerWidth - 100);
+            const y = (Math.random() - 0.5) * (window.innerHeight - 100);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `calc(50% + ${x}px)`;
+            noBtn.style.top = `calc(50% + ${y}px)`;
         }
 
         function win() {
             document.getElementById('main').innerHTML = `
-                <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/kyLYXonQpkUsLYvDEK/giphy.gif">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/kyLYXonQpkUsLYvDEK/giphy.gif">
                 <h1 style="color: #e91e63;">Yay! ❤️ دەستخۆش</h1>
             `;
         }
