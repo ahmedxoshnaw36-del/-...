@@ -10,40 +10,59 @@
             height: 100vh; margin: 0; font-family: sans-serif; background-color: #ffe4e1; 
             text-align: center; overflow: hidden; 
         }
-        img { width: 250px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        h1 { font-size: 28px; color: #d32f2f; margin-bottom: 30px; }
+        /* Fixed Minion Image Link */
+        img { width: 250px; border-radius: 20px; margin-bottom: 20px; }
+        
+        h1 { font-size: 26px; color: #d32f2f; margin-bottom: 30px; padding: 0 10px; }
+        
         .btn-container { 
             display: flex; justify-content: center; align-items: center; 
-            gap: 40px; width: 100%; height: 60px; position: relative; 
+            gap: 20px; width: 100%; min-height: 200px; position: relative;
         }
+
         button { 
-            padding: 15px 30px; font-size: 20px; border: none; border-radius: 12px; 
-            cursor: pointer; min-width: 110px; font-weight: bold; transition: 0.1s;
+            border: none; border-radius: 12px; cursor: pointer; 
+            font-weight: bold; transition: all 0.2s ease; font-family: inherit;
         }
-        #yes { background: #4caf50; color: white; }
-        #no { background: #f44336; color: white; position: relative; }
+
+        #yes { background: #4caf50; color: white; padding: 15px 30px; font-size: 20px; z-index: 10; }
+        #no { background: #f44336; color: white; padding: 10px 20px; font-size: 16px; }
     </style>
 </head>
 <body>
     <div id="main">
-        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNpS/giphy.gif" alt="Minion">
-        <h1>بیرم ناکەی هەی ....</h1>
+        <img id="minionImg" src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3ZzRyeGZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNpS/giphy.gif">
+        <h1 id="headerText">بیرم ناکەی هەی ....</h1>
+        
         <div class="btn-container">
             <button id="yes" onclick="win()">بەڵێ</button>
-            <button id="no" onmouseover="move()" onclick="move()" ontouchstart="move()">نەخێر</button>
+            <button id="no" onclick="shrinkNo()">نەخێر</button>
         </div>
     </div>
 
     <script>
-        function move() {
-            const btn = document.getElementById('no');
-            // This makes the button jumpable
-            btn.style.position = 'absolute';
-            // Calculates random spot on the screen
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+        let yesScale = 1;
+        let noScale = 1;
+
+        function shrinkNo() {
+            const yesBtn = document.getElementById('yes');
+            const noBtn = document.getElementById('no');
+            
+            // Make Yes button bigger
+            yesScale += 0.4;
+            yesBtn.style.transform = `scale(${yesScale})`;
+            
+            // Make No button smaller
+            noScale -= 0.15;
+            if (noScale < 0.2) noScale = 0; // Disappear if too small
+            noBtn.style.transform = `scale(${noScale})`;
+
+            // Optional: Move the No button to a random spot each time it's clicked
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
         }
 
         function win() {
